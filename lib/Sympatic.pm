@@ -19,43 +19,70 @@ fun import ($dest=caller) {
 
 1;
 
-=head1 Synopsis
+__END__
 
-Take a well crafted POD as example to this one
+=head1 NAME
+
+Sympatic - The boilerplate and documentation for the Sympa project Coding Style
+
+=head1 USAGE
+
+Every perl file of your project must start with
+
+    use Sympatic;
+
+
+=head1 CONTRIBUTE
+
+you are welcome to discuss about the C<Sympatic> style on the Sympa project
+developpers mailing list. If your proposal is accepted, edit the module the
+way you describe, update the documentation and test the whole thing.
 
     cpanm .
     RELEASE_TESTING=1 prove -Ilib t
 
-
 =head1 Sympa and CPAN
 
-=head2 use CPAN
+Every line of code that is used in the Sympa project should be carrefully
 
-why is it so important to
+The CPAN community reduce the cost of maintaining infrastructure code. And
+by maintaining it, we mean it the great way: improve, optimize, document,
+debug, test in a large number of perl bases, ...
 
-    * not revent the wheel
-    * share experiences and ideas with others
-    * reduce the cost of infrastructure maintainance, performance, quality,
-      documenation, ...
+We also want to benefit as much as possible from the experience, ideas and
+knowledge of the CPAN members.
+
+So if you want to contribute to Sympa, please concider picking a module on CPAN
+that does the job and contributing to it if needed. Push your own stuff if
+needed.
 
 =head2 the CPAN modules we rely on
 
-Moo, Dancer, F::P, T::S, P::T ...
+L<Moo|https://metacpan.org/pod/Moo> for POO,
+L<Dancer2|https://metacpan.org/pod/Dancer2> for web developpement,
+L<Template Toolkit|https://metacpan.org/pod/Template> for text templating,
+L<Path::Tiny|https://metacpan.org/pod/Path::Tiny> for file handling.
 
-=head2 contribute to CPAN
+We also use some helpers to make our code as maintainable as possible:
 
-Instead of reinventing the wheel
+L<Type::Standard|https://metacpan.org/pod/Types::Standard>,
+L<Function::Parameters|https://metacpan.org/pod/Function::Parameters>,
+L<Curry|https://metacpan.org/pod/Curry>,
+L<Perlude|https://metacpan.org/pod/Perlude>.
 
 =head1 Sympa Coding Style
 
-TODO: reach every notes Eiro took from the Hackathon and explain them here
+=head2 Object
 
-=head1 Todo
+=head1 AUTHORS
 
-Those are things we're working on
+=head1 LICENSE AND COPYRIGHT
+
+Copyright 2018 Sympa community <F<sympa-developpers@listes.renater.fr>>
+
+This package is free software and is provided "as is" without express
+or implied warranty.  It may be used, redistributed and/or modified
+under the terms of the Perl Artistic License subee
+(http://www.perl.com/perl/misc/Artistic.html)
 
 =cut
-
-
-
-
