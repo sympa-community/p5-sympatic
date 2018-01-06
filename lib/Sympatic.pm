@@ -7,14 +7,14 @@ use Function::Parameters;
 use Types::Standard;
 use v5.14;
 
-fun import ($dest=caller) {
-    Moo->import::into($dest);
-    feature->import::into($dest,qw(say));
-    strict->import::into($dest);
-    warnings->import::into($dest);
-    Import::Into->import::into($dest);
-    Function::Parameters->import::into($dest);
-    Types::Standard->import::into($dest);
+fun import ($to=caller) {
+    Moo->import::into($to);
+    feature->import::into($to,qw(say));
+    strict->import::into($to);
+    warnings->import::into($to);
+    Import::Into->import::into($to);
+    Function::Parameters->import::into($to);
+    Types::Standard->import::into($to);
 }
 
 1;
