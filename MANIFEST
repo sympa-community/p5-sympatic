@@ -2,3 +2,4 @@ Changes
 lib/Sympatic.pm
 Makefile.PL
 t/00_kwalitee.t
+MANIFEST

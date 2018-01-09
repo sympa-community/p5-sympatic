@@ -2,3 +2,8 @@ Sympatic - The boilerplate and documentation for the Sympa project Coding Style
 
 is meant to be well documented, easy to deploy and use for every perl programmer.
 
+# todo
+
+* even cpanm -t installs Test::Kwalitee. is there a way to remove that
+
+
