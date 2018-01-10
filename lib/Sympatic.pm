@@ -5,10 +5,12 @@ our $VERSION = '0.201801';
 use Import::Into;
 use Function::Parameters;
 use Types::Standard;
+require English;
 use v5.14;
 
 fun import ($to=caller) {
-    feature->import::into($to,qw(say));
+    English->import::into($to, qw<  -no_match_vars >);
+    feature->import::into($to,qw< say >);
     strict->import::into($to);
     warnings->import::into($to);
     Import::Into->import::into($to);
