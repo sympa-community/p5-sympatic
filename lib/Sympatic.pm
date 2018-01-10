@@ -8,7 +8,6 @@ use Types::Standard;
 use v5.14;
 
 fun import ($to=caller) {
-    Moo->import::into($to);
     feature->import::into($to,qw(say));
     strict->import::into($to);
     warnings->import::into($to);
