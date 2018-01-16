@@ -1,12 +1,12 @@
 package Sympatic;
+our $VERSION = '0.201801';
+use v5.14;
 use strict;
 use warnings;
-our $VERSION = '0.201801';
-use Import::Into;
 use Function::Parameters;
-use Types::Standard;
+require Import::Into;
 require English;
-use v5.14;
+require Types::Standard;
 
 fun import ($to=caller) {
     English->import::into($to, qw<  -no_match_vars >);
