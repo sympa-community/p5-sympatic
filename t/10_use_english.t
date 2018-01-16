@@ -1,6 +1,5 @@
 use Test::More;
 use Sympatic;
-use English;
 # use warnings qw< FATAL all >;
 
 eval { $_ = defined $ARG };

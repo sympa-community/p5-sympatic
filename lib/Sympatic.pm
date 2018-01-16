@@ -4,7 +4,6 @@ use v5.14;
 use strict;
 use warnings;
 require Import::Into;
-require English;
 require Types::Standard;
 
 sub import {
