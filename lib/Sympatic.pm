@@ -7,6 +7,7 @@ use Function::Parameters;
 require Import::Into;
 require English;
 require Types::Standard;
+use parent 'autodie';
 
 fun import ($to=caller) {
     English->import::into($to, qw<  -no_match_vars >);
@@ -16,6 +17,9 @@ fun import ($to=caller) {
     Import::Into->import::into($to);
     Function::Parameters->import::into($to);
     Types::Standard->import::into($to);
+    # autodie::import( $to, ':all');
+    @_ = ( $to, ":all" );
+    goto &autodie::import;
 }
 
 1;
@@ -32,14 +36,13 @@ Every perl file of your project must start with
 
     use Sympatic;
 
-
 =head1 CONTRIBUTE
 
 you are welcome to discuss about the C<Sympatic> style on the Sympa project
 developpers mailing list. If your proposal is accepted, edit the module the
 way you describe, update the documentation and test the whole thing.
 
-    cpanm .
+    cpanm --installdeps .
     RELEASE_TESTING=1 prove -Ilib t
 
 =head1 Sympa and CPAN

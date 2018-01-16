@@ -17,6 +17,7 @@ WriteMakefile
     , PREREQ_PM =>
         { 'Function::Parameters' => '2.001003'
         , 'Types::Standard'      => '1.002001'
+        , 'autodie'              => '2.29'
         , 'Moo'                  => '2.002005' }
     , TEST_REQUIRES =>
         { 'Test::Simple'   => '1.302120'
