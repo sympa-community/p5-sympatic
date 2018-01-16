@@ -3,13 +3,13 @@ our $VERSION = '0.201801';
 use v5.14;
 use strict;
 use warnings;
-use Function::Parameters;
 require Import::Into;
 require English;
 require Types::Standard;
-use parent 'autodie';
 
-fun import ($to=caller) {
+sub import {
+    my $to = caller;
+
     English->import::into($to, qw<  -no_match_vars >);
     feature->import::into($to,qw< say >);
     strict->import::into($to);
@@ -17,9 +17,12 @@ fun import ($to=caller) {
     Import::Into->import::into($to);
     Function::Parameters->import::into($to);
     Types::Standard->import::into($to);
-    # autodie::import( $to, ':all');
-    @_ = ( $to, ":all" );
-    goto &autodie::import;
+
+    # see https://github.com/pjf/autodie/commit/6ff9ff2b463af3083a02a7b5a2d727b8a224b970
+    # TODO: is there a case when caller > 1 ?
+    autodie->import::into(1);
+
+    utf8::all->import::into($to);
 }
 
 1;
