@@ -13,7 +13,7 @@ is meant to be well documented, easy to deploy and use for every perl programmer
 
     * Module::install used by PEP
     * both Moo and Dancer2 uses ExtUtils::MakeMaker
-    * i pick one without knowledge about the differences 
+    * i pick one without knowledge about the differences
 
 any idea on it ?
 
@@ -58,10 +58,12 @@ instead of the more classic
 David complained on it as it scares the newbies.
 I'm not sure about it. Any thought to share ?
 
-# use autodie by default ?
+## use autodie by default ?
 
 autodie dies everytime something's wrong with `$!`.
 i would like to use it as default because:
+
+### pros
 
 * developers often forget to test, autodie don't
 * autodie probably does the job the way you would do.
@@ -71,5 +73,18 @@ i would like to use it as default because:
     { no autodie;
         open my $fh,'>','/etc/sympa.conf'
             or die $SYMPA::EightBall; }
+
+### cons
+
+* if we want to step back, it will ask an audit to
+  spot where autodie made the job well
+
+  maybe we should have a way to localize autodie ? like
+
+  sub autodie (&@) {
+        use autodie;
+        my $cb = shift;
+        map $cb->(), @_;
+  }
 
 
