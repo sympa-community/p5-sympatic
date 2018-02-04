@@ -15,7 +15,7 @@ plan tests => 0+@tests;
 
 map {
     my ($name, $fh ) = @$_;
-    ok +(grep /utf8/, PerlIO::get_layers $$_[1])
-        , "$$_[0] handles utf8"
+    ok +(grep /utf8/, PerlIO::get_layers $fh)
+        , "$name handles utf8";
 } @tests;
 
