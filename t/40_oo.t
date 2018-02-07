@@ -2,7 +2,7 @@ BEGIN { eval q!
 
 package Person;
 use Types::Standard qw( Str );
-use Sympatic::oo;
+use Sympatic -oo;
 use Moo;
 
 has [qw( firstname lastname )] =>
@@ -41,23 +41,3 @@ is $p->age, 43 , '->age = 43';
 
 
 done_testing;
-
-
-
-# # package Course;
-# # 
-# # has qw( teacher is rw )
-# # , isa => InstanceOf['Person'];
-# # 
-# # has qw( students is rw )
-# # , isa => ArrayRef[ InstanceOf['Person'] ];
-# 
-# !;
-# 
-# # note "eval error: $@" unless
-# ok +( !$@ ), "eval declaration: $@";
-
-
-
-
-
