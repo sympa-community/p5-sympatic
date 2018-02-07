@@ -1,11 +1,8 @@
-Sympatic - The boilerplate and documentation for the Sympa project Coding Style
-
-is meant to be well documented, easy to deploy and use for every perl programmer.
-
 # todo
 
 * even cpanm -t installs Test::Kwalitee. is there a way to remove that
 * grep -RF TODO: lib t # and happy hacking
+* doc: find the link to PBP
 
 # open questions
 
@@ -16,29 +13,6 @@ is meant to be well documented, easy to deploy and use for every perl programmer
     * i pick one without knowledge about the differences
 
 any idea on it ?
-
-## To Moo or not to Moo
-
-there are a lot of cases where not using Moo is not only easier
-but probably should provide faster execution.
-
-    $$self{owner} //= 'jdoe';
-
-instead of
-
-    defined $self->owner
-        or $self->owner('jdoe');
-
-on the other hand, Moo code is more robust as
-
-    $$self{onwer} //= 'jdoe';
-
-will not complain and break later where
-
-    defined $self->onwer
-        or $self->owner('jdoe');
-
-will die immediatly.
 
 ## To Moo qw() or to Moo =>
 

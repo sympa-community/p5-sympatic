@@ -1,0 +1,210 @@
+=head1 NAME
+
+Sympatic - a simpler to read perl
+
+=head1 ACKNOLEDGEMENTS
+
+CPAN provides a lot of modules to make the perl code easy to read and write but
+it could be hard for perl newcomers to choose them. C<Sympatic> is a a curated
+selection of those modules and an entry point to the documentation of them.
+
+It also comes with an explained coding style proposal partially based on PBP.
+
+This module aims to be the standard import for the L<Sympa project|http://www.sympa.org>.
+
+
+=head1 SYNOPSIS
+
+=head1 INSTALL
+
+=head1 USAGE
+
+=head2 used pragma and modules
+
+starting your code with
+
+    use Sympatic;
+
+behave the same as
+
+    use English qw< -no_match_vars >;
+    use feature 'say';
+    use strict;
+    use warnings;
+    use Function::Parameters;
+    use utf8::all;
+
+
+while
+
+    use Sympatic -oo;
+
+aslo append
+
+    use Moo;
+    use MooX::LvalueAttribute;
+
+This section are short description and comments about those choices.
+
+We use L<strict|https://perldoc.perl.org/strict.html> and
+L<warnings|https://perldoc.perl.org/warnings.html>
+as they provide very usefull extra error messages.
+
+L<feature|https://metacpan.org/pod/feature> is the Perl pragma to enable new
+features from new versions of the perl interpreter. It also provide a way to
+get an error if your perl interpreter is not recent enough.
+
+
+Note that we use
+
+    use feature 'say';
+    use strict;
+    use warnings;
+
+instead of
+
+    use v5.14;
+
+to avoid the use of features related to
+L<smart match|https://perldoc.perl.org/perlop.html#Smartmatch-Operator>
+like the L<given/when flow control|https://perldoc.perl.org/functions/given.html>
+as they were abundantly criticized and will be removed in perl 5.28.
+
+L<English|https://metacpan.org/pod/English> - enable the english (named against awk variables)
+names for the variables documented in L<English|https://metacpan.org/pod/perlvar>.
+
+so basically, using C<Sympatic>, the two following instructions are the same.
+
+    print $(;
+    print $GID;
+
+L<English|https://metacpan.org/pod/English> - enable the english (named against awk variables)
+
+L<Function::Parameters|https://metacpan.org/pod/Function::Parameters>
+introduce the keywords C<fun> and C<method> to allow function signatures.
+
+L<Type::Standard|https://metacpan.org/pod/Types::Standard> provide nice generic way to define types that can
+be installed used from the C<fun> and C<method> signatures or the C<isa>
+contraint of a Moo property declaration.
+
+As example
+
+    method apply_coef ( $x ) {
+        for ($x) { defined and /^ \d+ $ /x or die "$_ should be an Int" }
+        ...
+    }
+
+    fun hello ( $who = 'world' ) {
+        for ($x) {
+            die "$_ should be an Int"
+                unless defined && /^ \d+ $ /x;
+        }
+        ...
+    }
+
+should be rewritten as
+
+    fun hello ( $who = 'world' ) {
+        for ($x) {
+            die "$_ should be an Int"
+                unless defined && /^ \d+ $ /x;
+        }
+        ...
+    }
+
+(open to debate) L<Curry|https://metacpan.org/pod/Curry> provide ease the creation of
+streams and callbacks.
+
+(open to debate) L<Perlude|https://metacpan.org/pod/Perlude> is the way to manipulate
+and combine streams.
+
+
+
+=head2 Object Oriented programming
+
+Sympatic objects are based on the 
+
+L<Moo|https://metacpan.org/pod/Moo> OO framework as well as the
+L<MooX::LvalueAttribute|https://metacpan.org/pod/MooX::LvalueAttribute> helper.
+
+this is the proprosed standard way to write a module using C<Sympatic -oo>.
+
+    package Fibo;
+    use Sympatic -oo;
+    use Type::Standard qw< Int >;
+
+    has value
+        ( is      => 'rw'
+        , isa     => Int
+        , lvalue  => 1
+        , default => 0 );
+
+    method next ( Int $x ) {
+        $self->value += $x
+    }
+
+rules are
+
+=over
+
+=item a property should be declared using the proper indentation. the C<is>, C<isa>
+should always be defined.
+
+=item C<method> keyword should be used to declare a new method
+
+=item C<method> keyword should be used to declare a new method
+
+
+
+=back
+
+
+=head1 CONTRIBUTE
+
+you are welcome to discuss about the C<Sympatic> style on the Sympa project
+developpers mailing list. If your proposal is accepted, edit the module the
+way you describe, update the documentation and test the whole thing.
+
+    cpanm --installdeps .
+    RELEASE_TESTING=1 prove -Ilib t
+
+=head1 Sympa and CPAN
+
+Every line of code that is used in the Sympa project should be carrefully
+
+The CPAN community reduce the cost of maintaining infrastructure code. And
+by maintaining it, we mean it the great way: improve, optimize, document,
+debug, test in a large number of perl bases, ...
+
+We also want to benefit as much as possible from the experience, ideas and
+knowledge of the CPAN members.
+
+So if you want to contribute to Sympa, please concider picking a module on CPAN
+that does the job and contributing to it if needed. Push your own stuff if
+needed.
+
+=head2 the CPAN modules we rely on
+
+L<Moo|https://metacpan.org/pod/Moo> for POO,
+L<Dancer2|https://metacpan.org/pod/Dancer2> for web developpement,
+L<Template Toolkit|https://metacpan.org/pod/Template> for text templating,
+L<Path::Tiny|https://metacpan.org/pod/Path::Tiny> for file handling.
+
+We also use some helpers to make our code as maintainable as possible:
+
+=head1 Sympa Coding Style
+
+=head2 Object
+
+=head1 AUTHORS
+
+=head1 LICENSE AND COPYRIGHT
+
+Copyright 2018 Sympa community <F<sympa-developpers@listes.renater.fr>>
+
+This package is free software and is provided "as is" without express
+or implied warranty.  It may be used, redistributed and/or modified
+under the terms of the Perl Artistic License subee
+(http://www.perl.com/perl/misc/Artistic.html)
+
+=cut
