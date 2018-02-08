@@ -34,12 +34,11 @@ behave the same as
     use Function::Parameters;
     use utf8::all;
 
-
 while
 
     use Sympatic -oo;
 
-aslo append
+also append
 
     use Moo;
     use MooX::LvalueAttribute;
@@ -48,7 +47,7 @@ This section are short description and comments about those choices.
 
 We use L<strict|https://perldoc.perl.org/strict.html> and
 L<warnings|https://perldoc.perl.org/warnings.html>
-as they provide very usefull extra error messages.
+as they provide very useful extra error messages.
 
 L<feature|https://metacpan.org/pod/feature> is the Perl pragma to enable new
 features from new versions of the perl interpreter. It also provide a way to
@@ -78,8 +77,6 @@ so basically, using C<Sympatic>, the two following instructions are the same.
     print $(;
     print $GID;
 
-L<English|https://metacpan.org/pod/English> - enable the english (named against awk variables)
-
 L<Function::Parameters|https://metacpan.org/pod/Function::Parameters>
 introduce the keywords C<fun> and C<method> to allow function signatures.
 
@@ -94,6 +91,14 @@ As example
         ...
     }
 
+becomes
+
+    method apply_coef ( Int $x ) {
+        ...
+    }
+
+while
+
     fun hello ( $who = 'world' ) {
         for ($x) {
             die "$_ should be an Int"
@@ -102,27 +107,28 @@ As example
         ...
     }
 
-should be rewritten as
+becomes
 
-    fun hello ( $who = 'world' ) {
-        for ($x) {
-            die "$_ should be an Int"
-                unless defined && /^ \d+ $ /x;
-        }
+    fun hello ( Str $who = 'world' )
         ...
     }
 
 (open to debate) L<Curry|https://metacpan.org/pod/Curry> provide ease the creation of
 streams and callbacks.
 
+    sub { $self->foo('bar') }
+
+can be written as
+
+    $self->curry::foo('bar')
+
 (open to debate) L<Perlude|https://metacpan.org/pod/Perlude> is the way to manipulate
 and combine streams.
 
 
-
 =head2 Object Oriented programming
 
-Sympatic objects are based on the 
+Sympatic objects are based on the
 
 L<Moo|https://metacpan.org/pod/Moo> OO framework as well as the
 L<MooX::LvalueAttribute|https://metacpan.org/pod/MooX::LvalueAttribute> helper.
@@ -139,9 +145,11 @@ this is the proprosed standard way to write a module using C<Sympatic -oo>.
         , lvalue  => 1
         , default => 0 );
 
-    method next ( Int $x ) {
+    method add ( Int $x ) {
         $self->value += $x
     }
+
+Note that the method C<add()> is almost useless when C<$self-&gt;value> is lvalue.
 
 rules are
 
@@ -150,14 +158,15 @@ rules are
 =item a property should be declared using the proper indentation. the C<is>, C<isa>
 should always be defined.
 
-=item C<method> keyword should be used to declare a new method
+=item C<method> keyword should be used to declare a new method.
 
-=item C<method> keyword should be used to declare a new method
+=item C<fun> keyword should be used to declare a private helper.
 
+=item C<has> should always has a C<is> and a C<isa> constraint.
 
+=item C<has> should be lvalue for any non-reference property.
 
 =back
-
 
 =head1 CONTRIBUTE
 
@@ -192,11 +201,13 @@ L<Path::Tiny|https://metacpan.org/pod/Path::Tiny> for file handling.
 
 We also use some helpers to make our code as maintainable as possible:
 
-=head1 Sympa Coding Style
-
-=head2 Object
-
 =head1 AUTHORS
+
+=over
+
+=item Marc Chantreux
+
+=back
 
 =head1 LICENSE AND COPYRIGHT
 
