@@ -1,3 +1,10 @@
 Revision history for Sympatic
 
-0.0 to come
+0.1    2018-02-xx    Marc Chantreux
+
+* add pod
+* add test suite
+
+0.0    2018-02-08    Marc Chantreux
+
+Initial release, just code
