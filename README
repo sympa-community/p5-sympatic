@@ -3,6 +3,7 @@
 * even cpanm -t installs Test::Kwalitee. is there a way to remove that
 * grep -RF TODO: lib t # and happy hacking
 * doc: find the link to PBP
+* use 5.14 (to avoid the use of older interpreters) without given
 
 # open questions
 
