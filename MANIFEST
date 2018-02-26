@@ -2,7 +2,6 @@ Changes
 lib/Sympatic.pm
 lib/Sympatic.pod
 Makefile.PL
-t/11_use_autodie.t
 t/12_utf_all.write.test
 t/20_Sympatic.t
 t/00_load.t

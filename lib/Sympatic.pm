@@ -14,10 +14,6 @@ sub import {
     Function::Parameters->import::into($to);
     utf8::all->import::into($to);
 
-    # see https://github.com/pjf/autodie/commit/6ff9ff2b463af3083a02a7b5a2d727b8a224b970
-    # TODO: is there a case when caller > 1 ?
-    autodie->import::into(1);
-
     # remove things for args until there is no more argument
     shift; # 'Sympatic', the package name
 
