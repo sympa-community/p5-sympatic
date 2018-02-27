@@ -8,3 +8,12 @@ script:
         cd Sympatic-$v ;\
         cpanm . ;\
         prove -vr
+notifications:
+  irc:
+    channels:
+      - "irc.freenode.org#sympa"
+    template:
+      - "%{branch}#%{build_number} by %{author}: %{message} (%{build_url})"
+    on_success: change
+    on_failure: always
+use_notice: true
