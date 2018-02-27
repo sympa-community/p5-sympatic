@@ -1,19 +1,19 @@
 language: perl
-perl: [ 5.14, 5.16, 5.18, '5.20', 5.22, 5.24, 5.26 ]
+# perl: [ 5.14, 5.16, 5.18, '5.20', 5.22, 5.24, 5.26 ]
+perl: [ 5.14 ]
 script:
-    - set -e ;\
-      v=$( perl -Ilib -MSympatic -E'say $Sympatic::VERSION' ) ;\
-        perl Makefile.PL ;\
-        make dist ;\
-        cd Sympatic-$v ;\
-        cpanm . ;\
+    - |
+        set -e
+        v=$( perl -Ilib -MSympatic -E'say $Sympatic::VERSION' )
+        perl Makefile.PL
+        make dist
+        cd Sympatic-$v
+        cpanm .
         prove -vr
 notifications:
   irc:
-    channels:
-      - "irc.freenode.org#sympa"
-    template:
-      - "%{branch}#%{build_number} by %{author}: %{message} (%{build_url})"
+    channels: [ "irc.freenode.org#sympa" ]
+    template: [ "%{branch}#%{build_number} by %{author}: %{message} (%{build_url})" ]
     on_success: change
     on_failure: always
-use_notice: true
+use_notice: false
