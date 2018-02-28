@@ -1,34 +1,18 @@
-BEGIN { eval q!
+BEGIN {
+    use Test::More;
+    use lib 't/lib/oo';
+    use_ok 'Person';
+}
 
-package Person;
-use Types::Standard qw( Str );
-use Sympatic -oo;
-use Moo;
+my $p = new_ok Person => [ lastname  => "Doe" ];
+isa_ok $p, 'Person';
+can_ok $p, 'lastname';
 
-has [qw( firstname lastname )] =>
-    ( is       => 'rw'
-    , isa      => Str
-    , lvalue   => 1);
-
-has age =>
-    ( is       => 'rw'
-    , lvalue   => 1 );
-
-! };
-
-use Test::More;
-
-my $p = eval
-    'Person->new
-    ( lastname  => "Doe" )';
-
-map { is Person => $_, "\$p is a ref to Person ($_)"
-        or note "$@ while calling the constructor" } ref $p;
-
-is $p->lastname , 'Doe'  , '->lastname  from constructor';
-
-ok +( not defined $p->firstname ) =>
-   q( not defined $p->firstname ) ;
+eval {
+    is $p->lastname , 'Doe'  , '->lastname  from constructor';
+    ok +( not defined $p->firstname ) =>
+       q( not defined $p->firstname );
+};
 
 eval q( $p->firstname //= 'John' );
 is $p->firstname, 'John' , '->firstname from //=';

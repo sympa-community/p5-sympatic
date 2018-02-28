@@ -15,11 +15,12 @@ WriteMakefile
     , PL_FILES            => {}
     , clean               => { FILES => 'Petition-*' }
     , PREREQ_PM =>
-        { 'Function::Parameters' => '2.001003'
-        , 'Types::Standard'      => '1.002001'
-        , 'Import::Into'         => '1.002005'
-        , 'utf8::all'            => '0.024'
-        , 'Moo'                  => '2.002005' }
+        { 'Function::Parameters'  => '2.001003'
+        , 'Types::Standard'       => '1.002001'
+        , 'Import::Into'          => '1.002005'
+        , 'utf8::all'             => '0.024'
+        , 'MooX::LvalueAttribute' => '0.16'
+        , 'Moo'                   => '2.002005' }
     , TEST_REQUIRES =>
         { 'Test::Simple'   => '1.302120'
         , 'Test::Kwalitee' => '1.27' }
