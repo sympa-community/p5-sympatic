@@ -19,7 +19,8 @@ WriteMakefile
         , 'Types::Standard'      => '1.002001'
         , 'Import::Into'         => '1.002005'
         , 'utf8::all'            => '0.024'
-        , 'Moo'                  => '2.002005' }
+        , 'Moo'                  => '2.002005'
+        , 'MooX::LvalueAttribute' => '0',}
     , TEST_REQUIRES =>
         { 'Test::Simple'   => '1.302120'
         , 'Test::Kwalitee' => '1.27' }
