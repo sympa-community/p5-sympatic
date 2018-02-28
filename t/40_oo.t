@@ -2,7 +2,6 @@ BEGIN {
     package Person;
     use Types::Standard qw( Str );
     use Sympatic -oo;
-    use Moo;
 
     has [qw( firstname lastname )] =>
         ( is       => 'rw'
