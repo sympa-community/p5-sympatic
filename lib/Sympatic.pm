@@ -12,7 +12,7 @@ sub import {
     strict->import::into($to);
     warnings->import::into($to);
     Function::Parameters->import::into($to);
-    utf8::all->import::into($to);
+    # utf8::all->import::into($to);
 
     # remove things for args until there is no more argument
     shift; # 'Sympatic', the package name
