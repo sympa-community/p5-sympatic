@@ -8,7 +8,7 @@ sub import {
     my $to = caller;
 
     English->import::into($to, qw<  -no_match_vars >);
-    feature->import::into($to,qw< say state >);
+    feature->import::into($to, qw< say state unicode_strings >);
     strict->import::into($to);
     warnings->import::into($to);
     Function::Parameters->import::into($to);
