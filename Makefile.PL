@@ -20,11 +20,20 @@ WriteMakefile
         , 'Import::Into'          => '1.002005'
         , 'utf8::all'             => '0.024'
         , 'MooX::LvalueAttribute' => '0.16'
-        , 'Moo'                   => '2.002005' }
+        , 'Moo'                   => '2.002005'
+        }
     , TEST_REQUIRES =>
-        { 'Test::Simple'   => '1.302120'
-        , 'Test::Kwalitee' => '1.27' }
+        { 'Test::Simple'        => '1.302120'
+        , 'Test::Kwalitee'      => '1.27'
+        , 'Test::CheckManifest' => '0.9'
+        , 'Test::Pod::Coverage' => '1.08'
+        , 'Test::Pod'           => '1.22'
+        }
     , dist  =>
         { COMPRESS => 'gzip -9f'
-        , SUFFIX => 'gz' }
-    , ($eumm_version >= 6.3001 ? ('LICENSE'=> 'perl') : ()));
+        , SUFFIX => 'gz'
+        }
+    , ( $eumm_version >= 6.3001
+        ? ('LICENSE'=> 'perl')
+        : ())
+    );
