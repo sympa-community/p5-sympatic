@@ -1,0 +1,11 @@
+.git
+^.travis.yml$
+\.bak$
+\.bak/
+\.old$
+\.swp$
+^blib
+^eg
+^Makefile$
+^todo.md
+^xt
