@@ -1,11 +1,30 @@
+sudo: false
+env: RELEASE_TESTING=1
 language: perl
-perl: [ 5.14, 5.16, 5.18, '5.20', 5.22, 5.24, 5.26 ]
-install: []
-script: [ sh ./xt/bin/test_install_dist.sh ]
-notifications:
-  irc:
-    channels: [ "irc.freenode.org#sympa" ]
-    template: [ "%{branch}#%{build_number} by %{author}: %{message} (%{build_url})" ]
-    on_success: change
-    on_failure: always
-use_notice: yes
+perl:
+  - "dev"
+  - "5.26"
+  - "5.24"
+  - "5.22"
+  - "5.20"
+  - "5.18"
+  - "5.16"
+  - "5.14"
+matrix:
+  include:
+    - perl: 5.26
+      env: COVERAGE=1   # enables coverage+coveralls reporting
+  allow_failures:
+    - perl: dev
+before_install:
+  - eval $(curl https://travis-perl.github.io/init) --auto
+install:
+  - cpan-install --deps
+  - cpan-install --coverage
+-notifications:
+-  irc:
+-    channels: [ "irc.freenode.org#sympa" ]
+-    template: [ "%{branch}#%{build_number} by %{author}: %{message} (%{build_url})" ]
+-    on_success: change
+-    on_failure: always
+-use_notice: yes
