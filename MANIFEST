@@ -6,14 +6,12 @@ MANIFEST
 MANIFEST.SKIP
 MYMETA.json
 MYMETA.yml
-pm_to_blib
 README
 t/00_load.t
 t/01_kwalitee.t
 t/01_kwalitee_extra.t
 t/10_use_english.t
 t/12_utf_all.t
-t/12_utf_all.write.test
 t/20_Sympatic.t
 t/40_oo.t
 t/lib/oo/Person.pm

@@ -20,3 +20,4 @@ map {
         , "$name handles utf8";
 } @tests;
 
+unlink 't/12_utf_all.write.test' or die;
