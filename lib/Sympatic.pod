@@ -11,61 +11,131 @@ Sympatic - a simpler to read perl
 <img src="https://travis-ci.org/sympa-community/p5-sympatic.svg?branch=master">
 </a>
 
-=head1 ACKNOLEDGEMENTS
-
-CPAN provides a lot of modules to make the perl code easy to read and write but
-it could be hard for perl newcomers to choose them. C<Sympatic> is a a curated
-selection of those modules and an entry point to the documentation of them.
-
-It also comes with an explained coding style proposal partially based on PBP.
-
-This module aims to be the standard import for the L<Sympa project|http://www.sympa.org>.
-
-
 =head1 SYNOPSIS
 
-=head1 INSTALL
+    package Counter;
+    use Sympatic;
+
+    use Types::Standard qw< Int >;
+
+    has qw( value is rw )
+    , default => 0
+    , lvalue  => 1
+    , isa     => Int;
+
+    method next { ++$self->value }
+    method ( Int $add ) { $self->value += $add }
+
+=head1 DESCRIPTION
+
+This document is an introduction to Sympatic Perl,
+
+project|http://www.sympa.org> developpers community focus on
+
+The default behavior of L<Perl|http://www.perl.org> could be significantly
+improved by the pragmas and CPAN modules so it can fit the expectations
+of a community of developpers and help them to enforce what they consider
+as the best practices. For decades, the minimal boilerplate seems to be
+
+    use strict;
+    use warnings;
+
+This boilerplate can evolve over the time be much more larger. Fortunately, it
+can be embedded into a module.
+
+Sympatic is the boilerplate module for the L<Sympa project|http://www.sympa.org>
+project.
+
+Some of the recommendations are inspired by the L<Perl Good
+Practices|http://shop.oreilly.com/product/9780596001735.do> book from L<Damian
+Conway|http://damian.conway.org/>. We refer to this book as PBP in this document.
+
+
+=head2 the goals behind Sympatic
+
+This section describes the goals that leads to the choices made for Sympatic and
+the coding style recommendations.
+
+=head3 balance between old servers and modern tools
+
+As we try to keep noone left behind, we also need to think about the future.
+
+As some sympa servers run on quiet old unix systems, we try to make our code
+running on old versions of the perl interpreters. However, this should not
+take us away from features of recent versions of perl that really helps
+performances, stability or good coding practices.
+
+We are currently supporting all the versions of perl since perl 5.16
+(released the 2012-May-2). That's the best we can afford. Please contact us
+if you need support of older Perl.
+
+=head3 reduce infrastructure code
+
+As perl emphasize freedom, it leaves you on your own with minimal tooling
+to write such simple and standard things most of us don't want to write by
+hand anymore (like object properties getters and setters, function parameter
+checkings, ...). This code is described by Damian Conway as "the infrastructure
+code".
+
+CPAN provide very good modules to make those disapear and we picked the ones
+we think to be the most relevant. Putting them all together provides the ability
+to write very expressive code without sacrifying the power of Perl.
+
+=head3 make perl more familiar for newcommers
+
+Choosing the CPAN modules to reduce infrastructure codes and writing the coding
+style recommendation below was made with our friends from the other dynamic langages
+in mind. We really expect developpers from the ruby, javascript and python provide
+a much better experience using Sympatic as it provides some idioms close to the ones
+they know in adition of the unique perl features.
+
+=head3 less typing and opt out policy
+
+Sympatic has the ability to provide different sets of features
+(see C<features> section) and the ones that are imported by default
+are the one that are used in the most common cases. For exemple: as
+most of the sympa packages actually are objects, the L<Moo|Moo> keywords
+are exported by default.
+
+See the L<features|features> section to learn how to avoid some of them.
 
 =head1 USAGE
 
-=head2 used pragma and modules
+=head2 what use Sympatic means?
 
-starting your code with
+If you are experimented Perl developpers, the simplest way to
+introduce Sympatic is to say that
 
     use Sympatic;
 
-behave the same as
-
-    use English qw< -no_match_vars >;
-    use feature 'say';
+is equivalent to
+ 
     use strict;
     use warnings;
+    use feature qw< unicode_strings say state >;
+    use English qw< -no_match_vars >;
+    use utf8;
     use Function::Parameters;
-    use utf8::all;
-
-while
-
-    use Sympatic -oo;
-
-also append
-
     use Moo;
-    use MooX::LvalueAttribute;
 
-This section are short description and comments about those choices.
+If you're not, you can refer to the well written L<Perl
+Documentation|http://perldoc.perl.org>. Here we provide a very short
+description
 
-We use L<strict|https://perldoc.perl.org/strict.html> and
-L<warnings|https://perldoc.perl.org/warnings.html>
-as they provide very useful extra error messages.
+The L<strict|https://perldoc.perl.org/strict.html> pragma avoid the
+the perl features requiring too much caution. Also the
+L<warnings|https://perldoc.perl.org/warnings.html> one provides very
+informational messages when perl detects a potential mistake. You can
+use L<diagnostics|https://perldoc.perl.org/diagnostics.html> to get a
+direct reference to the perl manual when a warning or an error message is
+risen.
 
 L<feature|https://metacpan.org/pod/feature> is the Perl pragma to enable new
-features from new versions of the perl interpreter. It also provide a way to
-get an error if your perl interpreter is not recent enough.
+features from new versions of the perl interpreter. If the perl interpreter
+you are using is too old, you will get an explicit message about the missing
+feature. Note that we use
 
-
-Note that we use
-
-    use feature 'say';
+    use feature qw< unicode_strings say state >;
     use strict;
     use warnings;
 
@@ -87,7 +157,7 @@ so basically, using C<Sympatic>, the two following instructions are the same.
     print $GID;
 
 L<Function::Parameters|https://metacpan.org/pod/Function::Parameters>
-introduce the keywords C<fun> and C<method> to allow function signatures.
+introduce the keywords C<fun> and C<method> to allow function signatures. See L<examples|examples> section.
 
 L<Type::Standard|https://metacpan.org/pod/Types::Standard> provide nice generic way to define types that can
 be installed used from the C<fun> and C<method> signatures or the C<isa>
@@ -122,17 +192,6 @@ becomes
         ...
     }
 
-(open to debate) L<Curry|https://metacpan.org/pod/Curry> provide ease the creation of
-streams and callbacks.
-
-    sub { $self->foo('bar') }
-
-can be written as
-
-    $self->curry::foo('bar')
-
-(open to debate) L<Perlude|https://metacpan.org/pod/Perlude> is the way to manipulate
-and combine streams.
 
 
 =head2 Object Oriented programming
@@ -228,3 +287,24 @@ under the terms of the Perl Artistic License subee
 (http://www.perl.com/perl/misc/Artistic.html)
 
 =cut
+=head2 features
+
+=head1 Lost jewels
+
+Those are modules that wasn't used in Sympatic itself but probably good to know
+
+=head2
+
+L<Curry|https://metacpan.org/pod/Curry> provide ease the creation of
+streams and callbacks.
+
+    sub { $self->foo('bar') }
+
+can be written as
+
+    $self->curry::foo('bar')
+
+=head2
+
+L<Perlude|https://metacpan.org/pod/Perlude> is the way to manipulate
+and combine streams.
