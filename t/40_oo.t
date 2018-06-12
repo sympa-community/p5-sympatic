@@ -1,3 +1,4 @@
+# use Test::More skip_all => 'not ready yet';
 BEGIN {
     use Test::More;
     use lib 't/lib/oo';
@@ -14,14 +15,16 @@ eval {
        q( not defined $p->firstname );
 };
 
-eval q( $p->firstname //= 'John' );
-is $p->firstname, 'John' , '->firstname from //=';
-eval q( $p->firstname //= 'Peter' );
-is $p->firstname, 'John' , '->firstname existed';
-eval q( $p->age = 42 );
-is $p->age, 42 , '->age = 42';
-eval q( $p->age++ );
-is $p->age, 43 , '->age = 43';
-
+SKIP: {
+    skip "lvalues attributes aren't Sympatic core yet" => 4;
+    eval q( $p->firstname //= 'John' );
+    is $p->firstname, 'John' , '->firstname from //=';
+    eval q( $p->firstname //= 'Peter' );
+    is $p->firstname, 'John' , '->firstname existed';
+    eval q( $p->age = 42 );
+    is $p->age, 42 , '->age = 42';
+    eval q( $p->age++ );
+    is $p->age, 43 , '->age = 43';
+}
 
 done_testing;
