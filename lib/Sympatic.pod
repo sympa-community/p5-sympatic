@@ -26,6 +26,8 @@ Sympatic - a simpler to read perl
     method next { ++$self->value }
     method ( Int $add ) { $self->value += $add }
 
+see L<usage|usage> section for more details.
+
 =head1 DESCRIPTION
 
 This document is an introduction to Sympatic Perl,
@@ -49,7 +51,6 @@ project.
 Some of the recommendations are inspired by the L<Perl Good
 Practices|http://shop.oreilly.com/product/9780596001735.do> book from L<Damian
 Conway|http://damian.conway.org/>. We refer to this book as PBP in this document.
-
 
 =head2 the goals behind Sympatic
 
@@ -99,8 +100,6 @@ are exported by default.
 
 See the L<features|features> section to learn how to avoid some of them.
 
-=head1 USAGE
-
 =head2 what use Sympatic means?
 
 If you are experimented Perl developpers, the simplest way to
@@ -118,9 +117,12 @@ is equivalent to
     use Function::Parameters;
     use Moo;
 
-If you're not, you can refer to the well written L<Perl
-Documentation|http://perldoc.perl.org>. Here we provide a very short
-description
+If you're not, we highly recommend the the well written L<Perl
+Documentation|http://perldoc.perl.org> (the `*tut` sections).
+Here we provide a very short description
+
+The L<utf8|https://perldoc.perl.org/utf8.html> pragma makes perl aware
+that the code of your project is encoded in utf8.
 
 The L<strict|https://perldoc.perl.org/strict.html> pragma avoid the
 the perl features requiring too much caution. Also the
@@ -148,63 +150,121 @@ L<smart match|https://perldoc.perl.org/perlop.html#Smartmatch-Operator>
 like the L<given/when flow control|https://perldoc.perl.org/functions/given.html>
 as they were abundantly criticized and will be removed in perl 5.28.
 
-L<English|https://metacpan.org/pod/English> - enable the english (named against awk variables)
-names for the variables documented in L<English|https://metacpan.org/pod/perlvar>.
+L<English|https://metacpan.org/pod/English> - enable the english (named against
+awk variables) names for the variables documented in
+L<English|https://metacpan.org/pod/perlvar>.
 
 so basically, using C<Sympatic>, the two following instructions are the same.
 
     print $(;
     print $GID;
 
-L<Function::Parameters|https://metacpan.org/pod/Function::Parameters>
-introduce the keywords C<fun> and C<method> to allow function signatures. See L<examples|examples> section.
+L<Function::Parameters|https://metacpan.org/pod/Function::Parameters> introduce
+the keywords C<fun> and C<method> to allow function signatures with gradual typin,
+named parameters and other features probably inspired by perl6, python and javascript.
+See L<examples|examples> section.
 
-L<Type::Standard|https://metacpan.org/pod/Types::Standard> provide nice generic way to define types that can
-be installed used from the C<fun> and C<method> signatures or the C<isa>
-contraint of a Moo property declaration.
+L<Type::Standard|https://metacpan.org/pod/Types::Standard> provide nice generic
+way to define types that can be installed used from the C<fun> and C<method>
+signatures or the C<isa> contraint of a Moo property declaration.
 
-As example
+=head1 USAGE
 
-    method apply_coef ( $x ) {
-        for ($x) { defined and /^ \d+ $ /x or die "$_ should be an Int" }
-        ...
-    }
+=head2 declaring functions
 
-becomes
+In addition to the C<sub> keyword provided by perl (documented in the
+L<perlsub|perlsub> manual), Sympatic comes with C<fun> and C<method>
+(provided and documented in L<Function::Parameters|Function::Parameters>).
 
-    method apply_coef ( Int $x ) {
-        ...
-    }
+As those two documentations are very well written, the current documentation
+only discuss about picking one of them and providing some exemples.
 
-while
+Use C<fun> when you can provide a signature for a function. C<fun> provide
+a signature syntax inspired by L<perl6|perl6> so you can use positional and
+named parameters, default values, parameter destructuring and gradual typing.
+You should use it in most cases.
 
-    fun hello ( $who = 'world' ) {
-        for ($x) {
-            die "$_ should be an Int"
-                unless defined && /^ \d+ $ /x;
-        }
-        ...
-    }
+Here are some examples:
 
-becomes
+    # positional parameter $x
+    fun absolute ( $x ) { $x < 0 ? -$x : $x }
 
-    fun hello ( Str $who = 'world' )
-        ...
-    }
+    # typing
+    use Types::Standard qw< Int >;
+    fun absolute ( Int $x ) { $x < 0 ? -$x : $x }
+
+    # default parameters
+    fun point ( $x = 0, $y = 0 ) { "( $x ; $y )" }
+    point 12; # ( 12 ; 0 )
+
+    # named parameters
+    fun point3D ( :$x = 0, :$y = 0, :$z = 0 ) { "( $x ; $y ; $z )" }
+    say point3D x => 12; # ( 12 ; 0 ; 0 )
+
+Use the C<sub> keyword fully variadic functions (the parameters are stored in
+the C<@_> array) or to use for example, let's assume you want to write a simple
+CSV seriralizer usable like this
+
+    print csv qw( header1 header2 header3 );
+    # outputs:
+    # header1;header2;header3
+
+this is a naive implementation demonstrating the use of C<@_>
 
 
+    sub csv { ( join ';', @_ ) , "\n" }
+
+
+common cases are list reduction or partial application
+
+=head3 default perl signatures, prototypes and attributes
+
+Experienced perl programmers should note that note that we don't use the perl
+signatures as documented in L<perlsub|perlsub> for two reasons:
+
+Those signatures are appears as experimental in L<perl5.20|perl5.20> and
+are finally L<perl5.26|perl5.26> (as we are bound to L<perl5.16|perl5.16>).
+Also, the signatures provided by L<Function::Parameters|Function::Parameters>) are
+much more powerful than the core ones (see description above).
+
+Attributes are still available. If you need to declare a prototype, they are available
+using the C<:prototype()> attribute as described in the
+L<OMGTODOFINDALINK|"signature" section of perlsub>. For exemple
+
+    fun twice ( $block ) :prototype(&) { &$block; &$block }
+    twice {say "hello"}
+    # outputs:
+    # hello
+    # hello
 
 =head2 Object Oriented programming
 
-Sympatic objects are based on the
+Sympatic imports L<Moo|Moo> and L<Function::Parameters> which means that
+you can declare an object using
 
-L<Moo|https://metacpan.org/pod/Moo> OO framework as well as the
-L<MooX::LvalueAttribute|https://metacpan.org/pod/MooX::LvalueAttribute> helper.
+=over
 
-this is the proprosed standard way to write a module using C<Sympatic -oo>.
+=item
 
-    package Fibo;
-    use Sympatic -oo;
+C<has> to define a new property
+
+=item
+
+C<extends> to inherit from a super class
+
+=item
+
+C<with> to compose your class using roles
+
+=item
+
+C<method> to combine with roles
+
+=back
+
+TODO: that keywords like around, after ?
+
+    use Sympatic;
     use Type::Standard qw< Int >;
 
     has value
@@ -213,28 +273,32 @@ this is the proprosed standard way to write a module using C<Sympatic -oo>.
         , lvalue  => 1
         , default => 0 );
 
-    method add ( Int $x ) {
-        $self->value += $x
-    }
+    method add ( Int $x ) { $self->value += $x }
 
 Note that the method C<add()> is almost useless when C<$self-&gt;value> is lvalue.
 
-rules are
+    package Human;
+    use Sympatic;
+    use Type::Standard qw< InstanceOf Str >;
 
-=over
+    has qw( name is rw )
+    , isa  => Str;
 
-=item a property should be declared using the proper indentation. the C<is>, C<isa>
-should always be defined.
+    method greetings ( (InstanceOf['Human']) $other ) {
+        sprintf "hello %s, i'm %s and i want to be a friend of you"
+            , $self->name
+            , $other->name
+    }
 
-=item C<method> keyword should be used to declare a new method.
+=head2 work with the filesystem
 
-=item C<fun> keyword should be used to declare a private helper.
+the "all in one" C<path> helper from L<Path::Tiny|https://metacpan.org/pod/Path::Tiny>
+is exported by Sympatic. refer to the documentation for examples.
 
-=item C<has> should always has a C<is> and a C<isa> constraint.
+=head2 set/unset features
 
-=item C<has> should be lvalue for any non-reference property.
-
-=back
+    TODO: describe how to enable/disable features
+    TODO: describe the features themselves
 
 =head1 CONTRIBUTE
 
@@ -260,40 +324,15 @@ So if you want to contribute to Sympa, please concider picking a module on CPAN
 that does the job and contributing to it if needed. Push your own stuff if
 needed.
 
-=head2 the CPAN modules we rely on
+=head2 other CPAN modules
 
-L<Moo|https://metacpan.org/pod/Moo> for POO,
+=head3 those we also rely on
+
 L<Dancer2|https://metacpan.org/pod/Dancer2> for web developpement,
 L<Template Toolkit|https://metacpan.org/pod/Template> for text templating,
-L<Path::Tiny|https://metacpan.org/pod/Path::Tiny> for file handling.
 
-We also use some helpers to make our code as maintainable as possible:
+=head3 those which can be useful too
 
-=head1 AUTHORS
-
-=over
-
-=item Marc Chantreux
-
-=back
-
-=head1 LICENSE AND COPYRIGHT
-
-Copyright 2018 Sympa community <F<sympa-developpers@listes.renater.fr>>
-
-This package is free software and is provided "as is" without express
-or implied warranty.  It may be used, redistributed and/or modified
-under the terms of the Perl Artistic License subee
-(http://www.perl.com/perl/misc/Artistic.html)
-
-=cut
-=head2 features
-
-=head1 Lost jewels
-
-Those are modules that wasn't used in Sympatic itself but probably good to know
-
-=head2
 
 L<Curry|https://metacpan.org/pod/Curry> provide ease the creation of
 streams and callbacks.
@@ -308,3 +347,21 @@ can be written as
 
 L<Perlude|https://metacpan.org/pod/Perlude> is the way to manipulate
 and combine streams.
+=head1 AUTHORS
+
+=over
+
+=item Marc Chantreux
+
+=item David Verdin
+
+=back
+
+=head1 LICENSE AND COPYRIGHT
+
+Copyright 2018 Sympa community <F<sympa-developpers@listes.renater.fr>>
+
+This package is free software and is provided "as is" without express
+or implied warranty.  It may be used, redistributed and/or modified
+under the terms of the Perl Artistic License subee
+(http://www.perl.com/perl/misc/Artistic.html)
