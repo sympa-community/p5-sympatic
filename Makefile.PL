@@ -9,9 +9,9 @@ $eumm_version =~ s/_//;
 
 WriteMakefile
     ( NAME                => 'Sympatic'
-    , AUTHOR              => q{YOUR NAME <youremail@example.com>}
+    , AUTHOR              => q{the sympa community <sympa-developpers@lists.renater.fr>}
     , VERSION_FROM        => 'lib/Sympatic.pm'
-    , ABSTRACT            => 'A boilerplate to enforce the coding style of Sympa mailing list manager'
+    , ABSTRACT            => 'A more producive perl thanks to CPAN'
     , PL_FILES            => {}
     , clean               => { FILES => 'Petition-*' }
     , PREREQ_PM =>
@@ -20,7 +20,7 @@ WriteMakefile
         , 'Import::Into'          => '1.002005'
         , 'Path::Tiny'            => '0.0104'
         # , 'utf8::all'             => '0.024'
-        # , 'MooX::LvalueAttribute' => '0.16'
+        , 'MooX::LvalueAttribute' => '0.16'
         , 'Moo'                   => '2.002005'
         }
     , TEST_REQUIRES =>

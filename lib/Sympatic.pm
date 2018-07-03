@@ -28,7 +28,7 @@
 
 
 package Sympatic;
-our $VERSION = '0.1';
+our $VERSION = '0.2_01';
 use strict;
 use warnings;
 require Import::Into;
@@ -69,12 +69,7 @@ sub import {
     $feature{oo} and do {
 
         Moo->import::into($to);
-
-        # everyone agreed on the idea but racke wants to know
-        # there are wierd dangerous things hidden under this.
-        # i (eiro) think it's just a brillant piece of
-        # code so the next line should be uncommented soon
-        # MooX::LvalueAttribute->import::into($to);
+        MooX::LvalueAttribute->import::into($to);
 
     };
 

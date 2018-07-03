@@ -2,7 +2,7 @@
 
 =head1 NAME
 
-Sympatic - a simpler to read perl
+Sympatic - A more producive perl thanks to CPAN
 
 =head1 STATUS
 
