@@ -152,7 +152,7 @@ as they were abundantly criticized and will be removed in perl 5.28.
 
 L<English|https://metacpan.org/pod/English> - enable the english (named against
 awk variables) names for the variables documented in
-L<English|https://metacpan.org/pod/perlvar>.
+L<the perlvar manual|https://metacpan.org/pod/perlvar>.
 
 so basically, using C<Sympatic>, the two following instructions are the same.
 
