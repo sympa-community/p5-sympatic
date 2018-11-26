@@ -1,5 +1,5 @@
 package Sympatic;
-our $VERSION = '0.1_01';
+our $VERSION = '0.1_001';
 use strict;
 use warnings;
 require Import::Into;
