@@ -1,9 +1,8 @@
-# use Test::More skip_all => 'not ready yet';
-BEGIN {
-    use Test::More;
-    use lib 't/lib/oo';
-    use_ok 'Person';
-}
+use Test::More;
+use lib 't/lib/oo';
+use_ok 'Person';
+
+note $_ for grep /Load/, values %INC;
 
 my $p = new_ok Person => [ lastname  => "Doe" ];
 isa_ok $p, 'Person';
@@ -15,16 +14,13 @@ eval {
        q( not defined $p->firstname );
 };
 
-SKIP: {
-    skip "lvalues attributes aren't Sympatic core yet" => 4;
-    eval q( $p->firstname //= 'John' );
-    is $p->firstname, 'John' , '->firstname from //=';
-    eval q( $p->firstname //= 'Peter' );
-    is $p->firstname, 'John' , '->firstname existed';
-    eval q( $p->age = 42 );
-    is $p->age, 42 , '->age = 42';
-    eval q( $p->age++ );
-    is $p->age, 43 , '->age = 43';
-}
+eval q( $p->firstname //= 'John' );
+is $p->firstname, 'John' , '->firstname from //=';
+eval q( $p->firstname //= 'Peter' );
+is $p->firstname, 'John' , '->firstname existed';
+eval q( $p->age = 42 );
+is $p->age, 42 , '->age = 42';
+eval q( $p->age++ );
+is $p->age, 43 , '->age = 43';
 
 done_testing;
