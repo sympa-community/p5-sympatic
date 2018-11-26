@@ -1,6 +1,0 @@
-This is the repo of Sympatic.pm, the module driving the coding style of the
-[sympa project](http://www.sympa.org).
-
-The [here](lib/Sympatic.pod) is the documentation of the version to come.
-Please use [the metacpan version](https://metacpan.org/source/MARCC/Sympatic-0.0/lib/Sympatic.pm)
-for production use.
