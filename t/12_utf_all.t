@@ -1,6 +1,5 @@
-use Sympatic;
-use Test::More skip_all => q(as utf8::all wasn't debated enough, it is temporary removed from the list);
-
+use Sympatic -oo;
+use Test::More;
 
 open my $read_fh , '<','t/12_utf_all.t';
 open my $write_fh, '>','t/12_utf_all.write.test';
@@ -14,10 +13,14 @@ my @tests =
 
 plan tests => 0+@tests;
 
+note "check that every fh are open or reopen as UTF-8 one";
+
 map {
     my ($name, $fh ) = @$_;
-    ok +(grep /utf8/, PerlIO::get_layers $fh)
-        , "$name handles utf8";
+    my @layers = PerlIO::get_layers $fh;
+    ok +(grep /utf8/, @layers) , "$name handles utf8"
+        or diag "$name uses those layers: @layers";
 } @tests;
 
 unlink 't/12_utf_all.write.test' or die;
+done_testing;
