@@ -2,7 +2,7 @@
 
     Sympatic
 
-    Copyright (C) 2017,2018 GIP Renater
+    Copyright (C) 2017,2018 Sympa Community
 
     Sympatic is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -19,16 +19,11 @@
 
     Authors:
     Marc Chantreux <marc.chantreux@renater.fr>
-    David Verdin   <david.verdin@renater.fr>
-    Stephan Hornburg <racke@linuxia.de>
 
 =cut
 
-
-
-
 package Sympatic;
-our $VERSION = '0.2_01';
+our $VERSION = '0.1_01';
 use strict;
 use warnings;
 require Import::Into;
@@ -37,7 +32,9 @@ sub import {
 
     my $to = caller;
     my %feature = qw<
-        unicode .
+        utf8all .
+        utf8    .
+        utf8io  .
         oo      .
         path    .
     >;
@@ -55,9 +52,11 @@ sub import {
         # disable default features
         if ( $_[0] =~
             /- (?<feature>
-                oo
-                | unicode
-                | path ) /x
+            utf8all |
+            utf8    |
+            utf8io  |
+            oo      |
+            path    )/x
         ) {
             delete $feature{ $+{feature} };
             shift;
@@ -68,29 +67,23 @@ sub import {
 
     }
 
-    $feature{path} and do {
-        Path::Tiny->import::into($to);
-    };
-
+    $feature{path} and do { Path::Tiny->import::into($to) };
     $feature{oo} and do {
-
         Moo->import::into($to);
         MooX::LvalueAttribute->import::into($to);
-
     };
 
-    # those was debated and refused
+    $feature{utf8all} and do {
+         utf8::all->import::into($to);
+         delete $feature{$_} for qw<  utf8 utf8io >;
+    };
 
-    # $feature{utf8all} and do {
-    #      utf8::all->import::into($to);
-    # }
-
-    $feature{unicode} and do {
+    $feature{utf8} and do {
         utf8->import::into($to);
         feature->import::into($to, qw< unicode_strings >);
-        # those aren't clearly defined
-        # open->import::into($to,qw< :UTF-8 :std >);
-    }
+    };
+
+    $feature{utf8io} and do { 'open'->import::into($to,qw< :UTF-8 :std >) };
 
     # see https://github.com/pjf/autodie/commit/6ff9ff2b463af3083a02a7b5a2d727b8a224b970
     # TODO: is there a case when caller > 1 ?
