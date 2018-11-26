@@ -1,10 +1,19 @@
 Revision history for Sympatic
 
-0.1    2018-02-xx    Marc Chantreux
+0.1    2018-xx    Marc Chantreux
 
-* add pod
+* add documentation
 * add test suite
 
-0.0    2018-02-08    Marc Chantreux
+after many improductive talks, we choose the
+
+* beginners shouldn't worry about gory details
+  (default should be helpful)
+* every extra behavior should be shut down
+
+so feature bundles (full battery by default, opt out flags
+provided) are available (see the pod)
+
+0.0    2018-02-07    Marc Chantreux
 
 Initial release, just code
