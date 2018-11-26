@@ -53,9 +53,15 @@ sub import {
     while (@_) {
 
         # disable default features
-        if ( $_[0] =~ /- (?<feature> oo | unicode | path ) /x ) {
+        if ( $_[0] =~
+            /- (?<feature>
+                oo
+                | unicode
+                | path ) /x
+        ) {
             delete $feature{ $+{feature} };
-            continue
+            shift;
+            next;
         }
 
         ...
