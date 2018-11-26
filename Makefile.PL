@@ -22,6 +22,7 @@ WriteMakefile
         # , 'utf8::all'             => '0.024'
         , 'MooX::LvalueAttribute' => '0.16'
         , 'Moo'                   => '2.002005'
+        , 'perl'                  => '5.16'
         }
     , TEST_REQUIRES =>
         { 'Test::Simple'        => '1.302120'
