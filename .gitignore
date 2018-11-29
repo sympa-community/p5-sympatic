@@ -8,3 +8,4 @@ sympatic-*
 *.sw?
 t/12_utf_all.write.test
 .build
+libsympatic*
