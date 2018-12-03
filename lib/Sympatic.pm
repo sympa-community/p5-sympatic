@@ -424,11 +424,17 @@ and combine streams.
 
 =head1 AUTHORS
 
+thanks for those people who contributed to the sympatic module (by date)
+
 =over
 
 =item Marc Chantreux
 
 =item David Verdin
+
+=item Mohammad S Anwar
+
+=item Stefan Hornburg (Racke)
 
 =back
 
