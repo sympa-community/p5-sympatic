@@ -106,11 +106,11 @@ see L<usage|usage> section for more details.
 
 This document is an introduction to Sympatic Perl,
 
-project|http://www.sympa.org> developpers community focus on
+L<project|http://www.sympa.org> developers community focus on
 
 The default behavior of L<Perl|http://www.perl.org> could be significantly
 improved by the pragmas and CPAN modules so it can fit the expectations
-of a community of developpers and help them to enforce what they consider
+of a community of developers and help them to enforce what they consider
 as the best practices. For decades, the minimal boilerplate seems to be
 
     use strict;
@@ -421,6 +421,7 @@ can be written as
 
 L<Perlude|https://metacpan.org/pod/Perlude> is the way to manipulate
 and combine streams.
+
 =head1 AUTHORS
 
 =over
