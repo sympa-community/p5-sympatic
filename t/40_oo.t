@@ -2,8 +2,6 @@ use Test::More;
 use lib 't/lib/oo';
 use_ok 'Person';
 
-note $_ for grep /Load/, values %INC;
-
 my $p = new_ok Person => [ lastname  => "Doe" ];
 isa_ok $p, 'Person';
 can_ok $p, 'lastname';
