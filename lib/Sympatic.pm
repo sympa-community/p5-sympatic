@@ -122,7 +122,7 @@ can be embedded into a module.
 Sympatic is the boilerplate module for the L<Sympa project|http://www.sympa.org>
 project.
 
-Some of the recommendations are inspired by the L<Perl Good
+Some of the recommendations are inspired by the L<Perl Best
 Practices|http://shop.oreilly.com/product/9780596001735.do> book from L<Damian
 Conway|http://damian.conway.org/>. We refer to this book as PBP in this document.
 
@@ -160,7 +160,7 @@ to write very expressive code without sacrifying the power of Perl.
 
 Choosing the CPAN modules to reduce infrastructure codes and writing the coding
 style recommendation below was made with our friends from the other dynamic langages
-in mind. We really expect developpers from the ruby, javascript and python provide
+in mind. We really expect developers from the ruby, javascript and python provide
 a much better experience using Sympatic as it provides some idioms close to the ones
 they know in adition of the unique perl features.
 
@@ -176,7 +176,7 @@ See the L<features|features> section to learn how to avoid some of them.
 
 =head2 what use Sympatic means?
 
-If you are experimented Perl developpers, the simplest way to
+If you are experimented Perl developers, the simplest way to
 introduce Sympatic is to say that
 
     use Sympatic;
@@ -377,7 +377,7 @@ is exported by Sympatic. refer to the documentation for examples.
 =head1 CONTRIBUTE
 
 you are welcome to discuss about the C<Sympatic> style on the Sympa project
-developpers mailing list. If your proposal is accepted, edit the module the
+developers mailing list. If your proposal is accepted, edit the module the
 way you describe, update the documentation and test the whole thing.
 
     cpanm --installdeps .
