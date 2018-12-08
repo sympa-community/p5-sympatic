@@ -100,7 +100,7 @@ Sympatic - A more producive perl thanks to CPAN
     method next { ++$self->value }
     method ( Int $add ) { $self->value += $add }
 
-see L<usage|usage> section for more details.
+see L</USAGE> section for more details.
 
 =head1 DESCRIPTION
 
@@ -133,9 +133,9 @@ the coding style recommendations.
 
 =head3 balance between old servers and modern tools
 
-As we try to keep noone left behind, we also need to think about the future.
+As we try to keep no one left behind, we also need to think about the future.
 
-As some sympa servers run on quiet old unix systems, we try to make our code
+As some sympa servers run on quite old unix systems, we try to make our code
 running on old versions of the perl interpreters. However, this should not
 take us away from features of recent versions of perl that really helps
 performances, stability or good coding practices.
@@ -152,7 +152,7 @@ hand anymore (like object properties getters and setters, function parameter
 checkings, ...). This code is described by Damian Conway as "the infrastructure
 code".
 
-CPAN provide very good modules to make those disapear and we picked the ones
+CPAN provide very good modules to make those disappear and we picked the ones
 we think to be the most relevant. Putting them all together provides the ability
 to write very expressive code without sacrifying the power of Perl.
 
@@ -162,7 +162,7 @@ Choosing the CPAN modules to reduce infrastructure codes and writing the coding
 style recommendation below was made with our friends from the other dynamic langages
 in mind. We really expect developers from the ruby, javascript and python provide
 a much better experience using Sympatic as it provides some idioms close to the ones
-they know in adition of the unique perl features.
+they know in addition of the unique perl features.
 
 =head3 less typing and opt out policy
 
@@ -191,7 +191,7 @@ is equivalent to
     use Function::Parameters;
     use Moo;
 
-If you're not, we highly recommend the the well written L<Perl
+If you're not, we highly recommend the well written L<Perl
 Documentation|http://perldoc.perl.org> (the `*tut` sections).
 Here we provide a very short description
 
@@ -240,7 +240,7 @@ See L<examples|examples> section.
 
 L<Type::Standard|https://metacpan.org/pod/Types::Standard> provide nice generic
 way to define types that can be installed used from the C<fun> and C<method>
-signatures or the C<isa> contraint of a Moo property declaration.
+signatures or the C<isa> constraint of a Moo property declaration.
 
 =head1 USAGE
 
@@ -277,7 +277,7 @@ Here are some examples:
 
 Use the C<sub> keyword fully variadic functions (the parameters are stored in
 the C<@_> array) or to use for example, let's assume you want to write a simple
-CSV seriralizer usable like this
+CSV serializer usable like this
 
     print csv qw( header1 header2 header3 );
     # outputs:
@@ -296,8 +296,8 @@ common cases are list reduction or partial application
 Experienced perl programmers should note that note that we don't use the perl
 signatures as documented in L<perlsub|perlsub> for two reasons:
 
-Those signatures are appears as experimental in L<perl5.20|perl5.20> and
-are finally L<perl5.26|perl5.26> (as we are bound to L<perl5.16|perl5.16>).
+Those signatures appear as experimental in L<perl5.20|perl-5.20.0> and
+are finally L<perl5.26|perl5.26> (as we are bound to L<perl5.16|perl-5.16.0>).
 Also, the signatures provided by L<Function::Parameters|Function::Parameters>) are
 much more powerful than the core ones (see description above).
 
@@ -349,7 +349,7 @@ TODO: that keywords like around, after ?
 
     method add ( Int $x ) { $self->value += $x }
 
-Note that the method C<add()> is almost useless when C<$self-&gt;value> is lvalue.
+Note that the method C<add()> is almost useless when C<< $self->value >> is lvalue.
 
     package Human;
     use Sympatic;
@@ -385,7 +385,7 @@ way you describe, update the documentation and test the whole thing.
 
 =head1 Sympa and CPAN
 
-Every line of code that is used in the Sympa project should be carrefully
+Every line of code that is used in the Sympa project should be carefully
 
 The CPAN community reduce the cost of maintaining infrastructure code. And
 by maintaining it, we mean it the great way: improve, optimize, document,
@@ -394,7 +394,7 @@ debug, test in a large number of perl bases, ...
 We also want to benefit as much as possible from the experience, ideas and
 knowledge of the CPAN members.
 
-So if you want to contribute to Sympa, please concider picking a module on CPAN
+So if you want to contribute to Sympa, please consider picking a module on CPAN
 that does the job and contributing to it if needed. Push your own stuff if
 needed.
 
@@ -402,7 +402,7 @@ needed.
 
 =head3 those we also rely on
 
-L<Dancer2|https://metacpan.org/pod/Dancer2> for web developpement,
+L<Dancer2|https://metacpan.org/pod/Dancer2> for web development,
 L<Template Toolkit|https://metacpan.org/pod/Template> for text templating,
 
 =head3 those which can be useful too
