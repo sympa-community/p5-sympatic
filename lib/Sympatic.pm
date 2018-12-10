@@ -464,8 +464,4 @@ under the terms of the Perl Artistic License subee
     You should have received a copy of the GNU General Public License
     along with this program; if not, see <http://www.gnu.org/licenses/>.
 
-    Authors:
-    Marc Chantreux <marc.chantreux@renater.fr>
-    Stefan Hornburg (Racke) <racke@linuxia.de>
-
 =cut
