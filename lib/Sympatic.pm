@@ -6,13 +6,20 @@ require Import::Into;
 
 sub import {
 
-    my $to      = caller;
+    my $to; # the NS to infect
+    # Sympatic->import(@options)
+    # Sympatic->import(to => $NS, @options)
+    ('to' eq ( $_[1] // '' ))
+    ? ( $to = $_[2], splice @_,0,3 )
+    : ( $to = caller, shift );
+
     my %feature = qw<
-      utf8all .
-      utf8    .
-      utf8io  .
-      oo      .
-      path    .
+      utf8all      .
+      utf8         .
+      utf8io       .
+      oo           .
+      class        .
+      path         .
     >;
 
     English->import::into( $to, qw<  -no_match_vars > );
@@ -21,20 +28,17 @@ sub import {
     warnings->import::into($to);
     Function::Parameters->import::into($to);
 
-    shift;    # 'Sympatic', the package name
-
     while (@_) {
 
         # disable default features
-        if (
-            $_[0] =~ /- (?<feature>
+        if ( $_[0] =~ /-(?<feature>
             utf8all |
             utf8    |
             utf8io  |
             oo      |
-            path    )/x
-          )
-        {
+            class   |
+            path
+        )/x) {
             delete $feature{ $+{feature} };
             shift;
             next;
@@ -45,8 +49,11 @@ sub import {
     }
 
     $feature{path} and do { Path::Tiny->import::into($to) };
+
     $feature{oo} and do {
-        Moo->import::into($to);
+        ( $feature{class}
+            ? 'Moo'
+            : 'Moo::Role' )->import::into($to);
         MooX::LvalueAttribute->import::into($to);
     };
 
