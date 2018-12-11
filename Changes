@@ -9,11 +9,11 @@ Revision history for Sympatic
 * add documentation
 * add test suite
 
-also, as we expect
+also, we expect
 
 * beginners to not worry about gory details
   (default should be helpful)
-* extra behavior to be disable
+* extra behavior to be disabled
 
 0.0    2018-02-07    Marc Chantreux
 
