@@ -104,10 +104,6 @@ see L</USAGE> section for more details.
 
 =head1 DESCRIPTION
 
-This document is an introduction to Sympatic Perl,
-
-L<project|http://www.sympa.org> developers community focus on
-
 The default behavior of L<Perl|http://www.perl.org> could be significantly
 improved by the pragmas and CPAN modules so it can fit the expectations
 of a community of developers and help them to enforce what they consider
@@ -116,22 +112,20 @@ as the best practices. For decades, the minimal boilerplate seems to be
     use strict;
     use warnings;
 
-This boilerplate can evolve over the time be much more larger. Fortunately, it
-can be embedded into a module.
+This boilerplate can evolve over the time to be much more larger. Fortunately, it
+can be embedded into a module. Sympatic is the boilerplate module for
+the L<Sympa project|http://www.sympa.org> project.
 
-Sympatic is the boilerplate module for the L<Sympa project|http://www.sympa.org>
-project.
-
-Some of the recommendations are inspired by the L<Perl Best
-Practices|http://shop.oreilly.com/product/9780596001735.do> book from L<Damian
-Conway|http://damian.conway.org/>. We refer to this book as PBP in this document.
+Some of the recommendations are inspired by the
+L<Perl Best Practices|http://shop.oreilly.com/product/9780596001735.do>
+book from L<Damian Conway|http://damian.conway.org/> (known as PBP in this document).
 
 =head2 the goals behind Sympatic
 
 This section describes the goals that leads to the choices made for Sympatic and
 the coding style recommendations.
 
-=head3 balance between old servers and modern tools
+=head3 no one left behind
 
 As we try to keep no one left behind, we also need to think about the future.
 
@@ -182,7 +176,7 @@ introduce Sympatic is to say that
     use Sympatic;
 
 is equivalent to
- 
+
     use strict;
     use warnings;
     use feature qw< unicode_strings say state >;
@@ -285,11 +279,12 @@ CSV serializer usable like this
 
 this is a naive implementation demonstrating the use of C<@_>
 
-
     sub csv { ( join ';', @_ ) , "\n" }
 
 
-common cases are list reduction or partial application
+common cases are list reduction or partial application like
+
+    sub price_with_taxes { price tax_rate => .2, @_ }
 
 =head3 default perl signatures, prototypes and attributes
 
@@ -297,9 +292,11 @@ Experienced perl programmers should note that note that we don't use the perl
 signatures as documented in L<perlsub|perlsub> for two reasons:
 
 Those signatures appear as experimental in L<perl5.20|perl-5.20.0> and
-are finally L<perl5.26|perl5.26> (as we are bound to L<perl5.16|perl-5.16.0>).
-Also, the signatures provided by L<Function::Parameters|Function::Parameters>) are
-much more powerful than the core ones (see description above).
+are finally a feature in L<perl5.26|perl5.26> with a changing behaviour
+in L<perl5.26|perl5.26> to make prototypes happy. Plus, we are bound
+to L<perl5.16|perl-5.16.0>. Also, the signatures provided by
+L<Function::Parameters|Function::Parameters>) are much more powerful than the
+core ones (see description above).
 
 Attributes are still available. If you need to declare a prototype, they are available
 using the C<:prototype()> attribute as described in the
