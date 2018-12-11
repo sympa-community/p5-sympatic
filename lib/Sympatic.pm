@@ -440,9 +440,8 @@ Thanks to the people who contributed to the sympatic module (by date)
 Copyright 2018 Sympa community <F<sympa-developpers@listes.renater.fr>>
 
 This package is free software and is provided "as is" without express
-or implied warranty.  It may be used, redistributed and/or modified
-under the terms of the Perl Artistic License subee
-(http://www.perl.com/perl/misc/Artistic.html)
+or implied warranty.  you can redistribute it and/or modify it under the
+same terms as the Perl 5 programming language system itself.
 
 =head1 LICENCE
 
