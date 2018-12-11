@@ -6,34 +6,35 @@ require Import::Into;
 
 sub import {
 
-    my $to = caller;
+    my $to      = caller;
     my %feature = qw<
-        utf8all .
-        utf8    .
-        utf8io  .
-        oo      .
-        path    .
+      utf8all .
+      utf8    .
+      utf8io  .
+      oo      .
+      path    .
     >;
 
-    English->import::into($to, qw<  -no_match_vars >);
-    feature->import::into($to, qw< say state >);
+    English->import::into( $to, qw<  -no_match_vars > );
+    feature->import::into( $to, qw< say state > );
     strict->import::into($to);
     warnings->import::into($to);
     Function::Parameters->import::into($to);
 
-    shift; # 'Sympatic', the package name
+    shift;    # 'Sympatic', the package name
 
     while (@_) {
 
         # disable default features
-        if ( $_[0] =~
-            /- (?<feature>
+        if (
+            $_[0] =~ /- (?<feature>
             utf8all |
             utf8    |
             utf8io  |
             oo      |
             path    )/x
-        ) {
+          )
+        {
             delete $feature{ $+{feature} };
             shift;
             next;
@@ -50,16 +51,16 @@ sub import {
     };
 
     $feature{utf8all} and do {
-         utf8::all->import::into($to);
-         delete $feature{$_} for qw<  utf8 utf8io >;
+        utf8::all->import::into($to);
+        delete $feature{$_} for qw<  utf8 utf8io >;
     };
 
     $feature{utf8} and do {
         utf8->import::into($to);
-        feature->import::into($to, qw< unicode_strings >);
+        feature->import::into( $to, qw< unicode_strings > );
     };
 
-    $feature{utf8io} and do { 'open'->import::into($to,qw< :UTF-8 :std >) };
+    $feature{utf8io} and do { 'open'->import::into( $to, qw< :UTF-8 :std > ) };
 
     # see https://github.com/pjf/autodie/commit/6ff9ff2b463af3083a02a7b5a2d727b8a224b970
     # TODO: is there a case when caller > 1 ?
