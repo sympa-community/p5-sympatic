@@ -1,6 +1,11 @@
 # dzil artefacts
 sympatic-*
 .build
+LICENSE
+MANIFEST
+Makefile.PL
+README
+META*
 
 # vim swap files
 *.sw?
