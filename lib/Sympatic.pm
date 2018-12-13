@@ -481,8 +481,6 @@ pick the most relevant group there
 
 =over
 
-=back
-
 =item  L<developers|https://listes.renater.fr/sympa/info/sympa-developpers>
 
 =item  L<packagers|https://listes.renater.fr/sympa/info/sympa-packagers>
