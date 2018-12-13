@@ -3,5 +3,5 @@
 
 
 dzil authordeps|cpanm
-rm LICENSE MANIFEST README Makefile.PL META.json META.yml 2>/dev/null
+rm -f LICENSE MANIFEST README Makefile.PL META.json META.yml
 RELEASE_TESTING=${1:-} dzil test
