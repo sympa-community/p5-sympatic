@@ -93,6 +93,12 @@ Sympatic - A more producive perl thanks to CPAN
 <img src="https://travis-ci.org/sympa-community/p5-sympatic.svg?branch=master">
 </a>
 
+Any bug report or feedback that can help to improve C<Sympatic> are very welcome.
+The quickest way to report a bug in Sympatic is by sending email to
+bug-Sympatic [at] rt.cpan.org. You can also report from the web using
+L<CPAN RT|https://rt.cpan.org/Public/Bug/Report.html?Queue=Sympatic> or even
+L<Github|https://github.com/sympa-community/p5-sympatic/issues>.
+
 =head1 SYNOPSIS
 
     package Counter;
@@ -381,12 +387,23 @@ is exported by Sympatic. Refer to the documentation for examples.
 
 =head1 CONTRIBUTE
 
+Any kind of contribution that can help to improve C<Sympatic> and the
+L<Sympa project|http://www.sympa.org> are very welcome. We meant *all* of them!
+from donating to setting up an hackathon, make some goodies or visual
+materials, webmastering, help promoting, translating, documenting, mentoring,
+... please contact L<us|http://www.sympa.org> on
+L<the freenode #sympa channel|irc://moznet/mozillazine> or the
+L<the sympa users mailing list|https://listes.renater.fr/sympa/info/sympa-users>.
+French people can also join us in
+L<the freenode #sympa channel|irc://moznet/mozillazine> or the
+L<the sympa users mailing list|https://listes.renater.fr/sympa/info/sympa-users>.
+
 You are welcome to discuss about the C<Sympatic> style on the Sympa project
 developers mailing list. If your proposal is accepted, edit the module the
 way you describe, update the documentation and test the whole thing.
 
     cpanm --installdeps .
-    RELEASE_TESTING=1 prove -Ilib t
+    sh xt/bin/test_install_dist.sh
 
 =head1 Sympa and CPAN
 
@@ -442,6 +459,55 @@ Thanks to the people who contributed to the sympatic module (by date)
 =item Stefan Hornburg (Racke)
 
 =back
+
+=head1 CONTACTS
+
+let's pick up the most confortable way for you
+
+=head1 IRC
+
+you can contact us via IRC on the main IRC channel (L<freenode #sympa
+channel|irc://freenode/sympa>). The used langage is english but don't hésitate
+to speak another one if you're not confortable enough.  there is also a
+(L<freenode #sympa-fr channel|irc://freenode/sympa>) for french people and you
+are really welcome to create a new channel for your own langage (just let us
+now).
+
+=head1 mailing lists
+
+pick the most relevant group there
+
+=over
+
+=back
+
+=item  L<developers|https://listes.renater.fr/sympa/info/sympa-developpers>
+
+=item  L<packagers|https://listes.renater.fr/sympa/info/sympa-packagers>
+
+=item  L<security|https://listes.renater.fr/sympa/info/sympa-security>
+
+=back
+
+=head1 CONTRIBUTE
+
+=head2 join us
+
+Any kind of contribution that can help to improve C<Sympatic> and the
+C<Sympa project|http://www.sympa.org> are very welcome. We meant *all* of them!
+from donating to setting up an hackathon, make some goodies or visual
+materials, webmastering, help promoting, translating, documenting, mentoring,
+... If you need help on helping us, don't hesitate to contact us. (see the contact section)
+
+
+=head2 bug report and feedback
+
+any bugfixe, improvement, documentation, proposal to do? let's talk about it ...
+
+The quickest way to report a bug in Sympatic is by sending email to
+bug-Sympatic [at] rt.cpan.org. You can also report from the web using
+[CPAN RT|https://rt.cpan.org/Public/Bug/Report.html?Queue=Sympatic> or even
+[Github|https://github.com/sympa-community/p5-sympatic/issues>.
 
 =head1 LICENSE AND COPYRIGHT
 
