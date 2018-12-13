@@ -261,8 +261,10 @@ L<perlsub|perlsub> manual), Sympatic comes with C<fun> and C<method>
 As those two documents are very well written, the current documentation
 only discuss about picking one of them and providing some examples.
 
+=for comment repetition of the last section ?
+
 Use C<fun> when you can provide a signature for a function. C<fun> provide
-a signature syntax inspired by L<perl6|perl6> so you can use positional and
+a signature syntax inspired by L<perl6|http://perl6.org/> so you can use positional and
 named parameters, default values, parameter destructuring and gradual typing.
 You should use it in most cases.
 
@@ -305,10 +307,10 @@ Common cases are list reduction or partial application like
 Experienced perl programmers should note that we don't use the perl
 signatures as documented in L<perlsub|perlsub> for two reasons:
 
-Those signatures appear as experimental in L<perl5.20|perl-5.20.0> and
-are finally a feature in L<perl5.26|perl5.26> with a changing behaviour
-in L<perl5.26|perl5.26> to make prototypes happy. Plus, we are bound
-to L<perl5.16|perl-5.16.0>. Also, the signatures provided by
+Those signatures appear as experimental in L<perl5.20|perlhist> and
+are finally a feature in L<perl5.26|perlhist> with a changing behaviour
+in L<perl5.26|perlhist> to make prototypes happy. Plus, we are bound
+to L<perl5.16|perlhist>. Also, the signatures provided by
 L<Function::Parameters|Function::Parameters>) are much more powerful than the
 core ones (see description above).
 
